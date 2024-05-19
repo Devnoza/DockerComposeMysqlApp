@@ -1,0 +1,25 @@
+version "2"
+services:
+    app:
+        build: ./app
+        links:
+           -db
+        ports:
+          -"5000:5000"
+        depends_on
+          - db     
+        networks:
+          - test        
+    db:
+        image: mysql
+        port:
+          -"33060:3306"
+        environment:
+          MYSQL_ROOT_PASSWORD: root
+        volumes:
+          - ./data/var/lib/mysql
+        networks:
+          - test
+
+networks:
+  test:          
